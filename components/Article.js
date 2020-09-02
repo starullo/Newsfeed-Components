@@ -86,6 +86,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  }, 
+  {
+    title: 'BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH ',
+    date: 'Sep 2nd, 2020',
+    firstParagraph: 'BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH ',
+    secondParagraph: 'BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH ',
+    thirdParagraph: 'BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH '
   }
 ];
 
@@ -101,8 +108,61 @@ const data = [
     {three separate paragraph elements}
 
     <span class="expandButton">+</span>
-  </div>
+  </div> */
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
 
+  /* creating elements */
+const artDiv = document.createElement('div');
+const h2 = document.createElement('h2');
+const p = document.createElement('p');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+const span = document.createElement('span');
+
+/*adding classes */
+artDiv.classList.add('article');
+artDiv.classList.add('article-open')
+p.classList.add('date');
+span.classList.add('expandButton');
+
+/*setting text */
+h2.textContent = title;
+p.textContent = date;
+p1.textContent = firstParagraph;
+p2.textContent = secondParagraph;
+p3.textContent = thirdParagraph;
+span.textContent = '+';
+span.style.transform = 'scale(3)'
+
+/*structuring*/
+artDiv.prepend(h2);
+artDiv.appendChild(p);
+artDiv.appendChild(p1);
+artDiv.appendChild(p2);
+artDiv.appendChild(p3);
+artDiv.appendChild(span);
+
+/*event listener*/
+span.addEventListener('click', evntObj=>{
+  artDiv.classList.toggle('article-open');
+  let array = Array.from(artDiv.classList);
+  if (array.includes('article-open')) {
+    h2.style.opacity = '1.0';
+  } else {
+    h2.style.opacity = '0.0';
+  }
+});
+
+
+return artDiv;
+}
+
+data.forEach(dataObj=>{
+  document.body.appendChild(articleMaker(dataObj));
+})
+
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 

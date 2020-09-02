@@ -16,7 +16,40 @@ let menuItems = [
     <ul>
       {each menu item as an <li>}
     </ul>
-  </div>
+  </div> */
+
+function menuMaker(arr) {
+  /*creating elements */
+  const cont = document.createElement('div');
+  const ul = document.createElement('ul');
+
+  /*adding classes */
+  cont.classList.add('menu');
+  cont.classList.add('menu--open');
+
+  /*adding list items to ul */
+  arr.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    ul.appendChild(li);
+  });
+
+  cont.appendChild(ul);
+
+  /*event listener */
+  const img = document.querySelector('.menu-button');
+  img.addEventListener('click', evntObj=>{
+    cont.classList.toggle('menu--open');
+  });
+
+  return cont;
+
+};
+
+const header = document.querySelector('.header');
+header.appendChild(menuMaker(menuItems));
+
+  /*
 
   The 'menuMaker' takes an array of menu items as its only argument.
 
